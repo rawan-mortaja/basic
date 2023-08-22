@@ -9,9 +9,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Blog extends Model
 {
     use HasFactory;
-    protected $gurarded = [];
 
-    public function category(): BelongsTo
+    protected $guarded = [];
+
+    public function category()
     {
         return $this->belongsTo(BlogCategory::class, 'blog_category_id', 'id');
     }

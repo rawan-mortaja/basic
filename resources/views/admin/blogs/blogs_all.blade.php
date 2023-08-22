@@ -39,7 +39,7 @@
                                     @php($i = 1)
                                     @foreach ($blogs as $key => $item)
                                         <tr>
-                                            <td> {{ $i++}} </td>
+                                            <td> {{ $i++ }} </td>
                                             <td> {{ $item['category']['blog_category'] }} </td>
                                             <td> {{ $item->blog_title }} </td>
                                             <td> {{ $item->blog_tags }} </td>
