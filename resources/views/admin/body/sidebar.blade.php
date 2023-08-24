@@ -92,8 +92,6 @@
                      </a>
                      <ul class="sub-menu" aria-expanded="false">
                          <li><a href="{{ route('footer.setup') }}">Footer Setup</a></li>
-
-
                      </ul>
                  </li>
 

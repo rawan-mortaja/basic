@@ -216,14 +216,6 @@
                                 </form>
                             </div>
 
-
-
-
-
-
-
-
-
                             <div class="widget">
                                 <h4 class="widget-title">Recent Blog</h4>
                                 <ul class="rc__post">

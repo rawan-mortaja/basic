@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Home\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Home\FooterController;
 use App\Http\Controllers\Home\HomeSliderController;
 use App\Http\Controllers\PortfolioController;
 use App\Http\Controllers\Home\BlogCategoryController;

@@ -69,7 +69,7 @@
                                     <div class="col-sm-10">
                                         <textarea id="elm1" name="blog_description">
                                                       {{ $blogs->blog_description }}
-                                         </textarea>
+                                         </textarea> 
                                     </div>
                                 </div>
                                 <!-- end row -->
