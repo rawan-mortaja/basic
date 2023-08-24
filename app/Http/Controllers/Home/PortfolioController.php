@@ -1,7 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
-
+namespace App\Http\Controllers\Home;
+use App\Http\Controllers\Controller;
 use App\Models\Portfolio;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -146,5 +146,6 @@ class PortfolioController extends Controller
         $portfolio = Portfolio::latest()->get();
         return view('frontend.portfolio', compact('portfolio'));
     } // End Method
+
 
 }

@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Home;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\BlogCategory;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+use \Intervention\Image\Facades\Image;
+use Illuminate\Support\Carbon;
 
 class BlogController extends Controller
 {
     public function AllBlog()
     {
+
         $blogs = Blog::latest()->get();
         return view('admin.blogs.blogs_all', compact('blogs'));
     } // End Method
@@ -23,6 +24,7 @@ class BlogController extends Controller
         $categories = BlogCategory::orderBy('blog_category', 'ASC')->get();
         return view('admin.blogs.blogs_add', compact('categories'));
     } // End Method
+
 
     public function StoreBlog(Request $request)
     {
@@ -50,15 +52,20 @@ class BlogController extends Controller
         return redirect()->route('all.blog')->with($notification);
     } // End Method
 
+
     public function EditBlog($id)
     {
+
         $blogs = Blog::findOrFail($id);
         $categories = BlogCategory::orderBy('blog_category', 'ASC')->get();
         return view('admin.blogs.blogs_edit', compact('blogs', 'categories'));
-    }
+    } // End Method
+
+
 
     public function UpdateBlog(Request $request)
     {
+
         $blog_id = $request->id;
 
         if ($request->file('blog_image')) {
@@ -74,6 +81,7 @@ class BlogController extends Controller
                 'blog_tags' => $request->blog_tags,
                 'blog_description' => $request->blog_description,
                 'blog_image' => $save_url,
+
             ]);
             $notification = array(
                 'message' => 'Blog Updated with Image Successfully',
@@ -90,59 +98,66 @@ class BlogController extends Controller
                 'blog_description' => $request->blog_description,
 
             ]);
+
             $notification = array(
                 'message' => 'Blog Updated without Image Successfully',
                 'alert-type' => 'success'
             );
 
             return redirect()->route('all.blog')->with($notification);
-        }
-    }
+        } // end Else
+
+    } // End Method
+
+
 
     public function DeleteBlog($id)
     {
-        $blog = Blog::findOrFail($id);
-        $img = $blog->blog_image;
+
+        $blogs = Blog::findOrFail($id);
+        $img = $blogs->blog_image;
         unlink($img);
 
         Blog::findOrFail($id)->delete();
 
         $notification = array(
-            'message' => 'Belog Deleted Successfully',
+            'message' => 'Blog Deleted Successfully',
             'alert-type' => 'success'
         );
 
         return redirect()->back()->with($notification);
-    }
+    } // End Method
+
+
 
     public function BlogDetails($id)
     {
-        $allblogs = Blog::latest()
-            ->limit(5)
-            ->get();
+
+        $allblogs = Blog::latest()->limit(5)->get();
         $blogs = Blog::findOrFail($id);
-        $categories = BlogCategory::orderBy('blog_category', 'ASC')
-            ->get();
+        $categories = BlogCategory::orderBy('blog_category', 'ASC')->get();
         return view('frontend.blog_details', compact('blogs', 'allblogs', 'categories'));
-    }
+    } // End Method
+
 
     public function CategoryBlog($id)
     {
-        $blogpost = Blog::where('blog_category_id', $id)
-            ->orderBy('id', 'DESC')
-            ->get;
-        $allblogs = Blog::latest()
-            ->limit(5)
-            ->get();
-        $categories = BlogCategory::orderBy('blog_category', 'ASC')
-            ->get();
+
+        $blogpost = Blog::where('blog_category_id', $id)->orderBy('id', 'DESC')->get();
+        $allblogs = Blog::latest()->limit(5)->get();
+        $categories = BlogCategory::orderBy('blog_category', 'ASC')->get();
         $categoryname = BlogCategory::findOrFail($id);
         return view('frontend.cat_blog_details', compact('blogpost', 'allblogs', 'categories', 'categoryname'));
-    }
+    } // End Method
 
     public function HomeBlog()
     {
-        $allblogs = Blog::latest()->get();
-        return view('frontend.blog', compact('allblogs'));
-    }
+
+        $categories = BlogCategory::orderBy('blog_category', 'ASC')->get();
+        $allblogs = Blog::latest()->paginate(3);
+        return view('frontend.blog', compact('allblogs', 'categories'));
+    } // End Method
+
+
+
 }
