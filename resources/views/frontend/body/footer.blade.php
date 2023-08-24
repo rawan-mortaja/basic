@@ -26,7 +26,7 @@
                         <h4 class="title">AUSTRALIA</h4>
                     </div>
                     <div class="footer__widget__address">
-                        <p>{{ $allfooter->adress }}</p>
+                        <p>{{ $allfooter->address }}</p>
                         <a href="mailto:{{ $allfooter->email }}" class="mail">{{ $allfooter->email }}</a>
                     </div>
                 </div>

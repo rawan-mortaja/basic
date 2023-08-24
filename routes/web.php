@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Home\AboutController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Home\ContactController;
 use App\Http\Controllers\Home\FooterController;
 use App\Http\Controllers\Home\HomeSliderController;
 use App\Http\Controllers\PortfolioController;
@@ -68,7 +69,7 @@ Route::controller(HomeSliderController::class)
     });
 
 // About Page All   Route
-Route::controller(AboutController::class)
+Route::controller(AboutController   ::class)
     ->group(function () {
         Route::get('/about/page', 'AboutPage')
             ->name('about.page');
